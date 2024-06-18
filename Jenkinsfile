@@ -1,12 +1,5 @@
 pipeline {
   agent any
-
-//   scm {
-//     git url: 'https://github.com/eranmekler/Dockerized_webserver.git'
-//     credentialsId: 'ssh_key_for_github'
-//     fetchTags true
-//   }
-
   triggers {
     githubPush()
   }
@@ -14,11 +7,11 @@ pipeline {
     stage('Build and Tag Image') {
       steps {
         script {
-          def gitTag = sh(script: 'git describe --abbrev=0 --tags', returnStdout: true).trim()
-
-          echo "Building and tagging image with version: ${gitTag}"
-
-          sh "docker build -t ${env.IMAGE_NAME}:${gitTag} ."
+          sh """
+            git_tag=$(git describe --abbrev=0 --tags 2>/dev/null || echo "latest")
+            echo "Building image with tag: $git_tag"
+            docker build -t my-app-image:$git_tag .
+          """
         }
       }
     }
