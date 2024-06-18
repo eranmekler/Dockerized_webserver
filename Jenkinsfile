@@ -1,11 +1,11 @@
 pipeline {
   agent any
 
-  scm {
-    git url: 'https://github.com/eranmekler/Dockerized_webserver.git'
-    credentialsId: 'ssh_key_for_github'
-    fetchTags true
-  }
+//   scm {
+//     git url: 'https://github.com/eranmekler/Dockerized_webserver.git'
+//     credentialsId: 'ssh_key_for_github'
+//     fetchTags true
+//   }
 
   triggers {
     githubPush()
