@@ -8,7 +8,7 @@ pipeline {
       steps {
         script {
           sh """
-            git_tag=${(git describe --abbrev=0 --tags 2>/dev/null || echo "latest")}
+            ${git_tag}=(git describe --abbrev=0 --tags 2>/dev/null || echo "latest")
             echo "Building image with tag: ${git_tag}"
             docker build -t my-app-image:${git_tag} .
           """
