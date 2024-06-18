@@ -8,7 +8,7 @@ pipeline {
   }
 
   triggers {
-    githubPush events: 'push', branches: [ 'main' ]
+    githubPush()
   }
   stages {
     stage('Build and Tag Image') {
