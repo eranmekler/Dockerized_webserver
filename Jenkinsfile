@@ -7,7 +7,7 @@ pipeline {
   }
 
   triggers {
-    scm('*/main')
+    github(events: [ 'push' ], branches: [ 'main' ])
   }
 
   stage('Build and Tag Image') {
